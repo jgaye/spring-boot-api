@@ -7,3 +7,6 @@ Experimenting with Spring Boot
 * Develop the API intelligence in Java
 * Use Swagger UI to display and document the API
 * Document the learning time of the above
+
+## Learning curve
+* Created maven project with IntelliJ and added spring dependency - 1h
