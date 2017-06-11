@@ -1,0 +1,149 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Library API",
+    "description": "Keep your to-read list in check",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/myapi",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/library": {
+      "get": {
+        "summary": "My list of books",
+        "description": "List all the books in my library\n",
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of products",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a book to the library",
+        "description": "Add a book to the library\n",
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "The created Book",
+            "schema": {
+              "type": "Book",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/library/{bookId}": {
+      "parameters": [
+        {
+          "name": "bookId",
+          "in": "path",
+          "description": "String input for book service",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "get info on a book",
+        "description": "Get the title, author and if you read the book yet\n",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "change info of the book",
+        "description": "Update the whole book model with the passed title, author and read status.\n",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "summary": "toggle the read status",
+        "description": "Toggle the read status only, no body required\n",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove a book from the library",
+        "description": "Delete the full book entry\n",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the Book"
+        },
+        "author": {
+          "type": "string",
+          "description": "The author of the Book"
+        },
+        "finished": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
